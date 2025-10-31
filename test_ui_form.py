@@ -1,4 +1,4 @@
-import pytest
+import pytest, json
 from playwright.sync_api import Page, expect
 
 def test_ui_form (page : Page):
@@ -73,7 +73,7 @@ def test_ui_form (page : Page):
     #map email to card id
     email_card_map = []
 
-    for i in range(min(len(created_emails), len(card_ids))):
+    for i in range(m    in(len(created_emails), len(card_ids))):
         email_card_map.append({
             "email": created_emails[i],
             "cardId": card_ids[i]
@@ -81,5 +81,7 @@ def test_ui_form (page : Page):
 
     print(email_card_map)
 
+    with open("email_to_cardId.json", "w") as f:
+        json.dump(email_card_map, f, indent=4)
 
     page.pause()
