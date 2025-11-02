@@ -5,10 +5,8 @@ base_url = "https://bff-api.demo.litecard.io"
 username = "qa-a3@litecard.com.au"
 password = "bR5x$9wNzE"
 
-def test_authenticate() :
-    with sync_playwright() as p : 
-        request_context = p.request.new_context()
-
+def get_token(request_context) :
+    
         login_payload = {
             "username" : f"{username}",
             "password" : f"{password}"
@@ -21,22 +19,21 @@ def test_authenticate() :
         print(f"access_token : {token}")
         return token
 
-def test_api_request(request_context, method, endpoint, token=None, body=None):
+def api_request(request_context, method, endpoint, token=None, body=None):
     headers = {"Content-type":"application/json"}
     if token :
         headers["Authorization"] = f"Bearer {token}"
 
     url = f"{base_url}{endpoint}"
-    payload = json.dumps(body) if body else None
 
-    if method == "Get":
+    if method == "GET":
         res = request_context.get(url, headers=headers)
     elif method == "POST":
-        res = request_context.post(url, data=payload, headers=headers)
+        res = request_context.post(url, data=body, headers=headers)
     elif method == "PATCH":
-        res = request_context.patch(url, data=payload, headers=headers)
+        res = request_context.patch(url, data=body, headers=headers)
     elif method == "PUT":
-        res = request_context.put(url, data=payload, headers=headers)
+        res = request_context.put(url, data=body, headers=headers)
     elif method == "DELETE":
         res = request_context.delete(url, headers=headers)
     else:
@@ -44,4 +41,28 @@ def test_api_request(request_context, method, endpoint, token=None, body=None):
     
     assert res.ok, f"{method} {endpoint} failed {res.text()}"
     return res.json()
+
+def test_api_flow() : 
+        
+        with sync_playwright() as p : 
+            request_context = p.request.new_context()
+
+            #Call login function
+            token = get_token(request_context)
+
+            #Load json
+            with open("email_to_cardId.json","r") as f:
+                users = json.load(f)
+        
+            #collecting cardID from json
+            for item in users:
+                card_id = item["cardId"]
+                email = item ["email"]
+
+                print (f"\n collecting {email} and {card_id}")
+
+                #test API flow
+                #GET API
+                get_result = api_request(request_context, "GET", f"/api/v1/card/{card_id}", token)
+                print(f"\n card data : {get_result}")
 

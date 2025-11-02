@@ -68,12 +68,13 @@ def test_ui_form (page : Page):
             if value:  # only append if not blank
                 card_ids.append(value)
 
-    card_ids = card_ids[:len(created_emails)]
+    #this is to handle the mismatch of the email and cardId order
+    card_ids = list(reversed(card_ids[:len(created_emails)]))
 
     #map email to card id
     email_card_map = []
 
-    for i in range(m    in(len(created_emails), len(card_ids))):
+    for i in range(len(created_emails)):
         email_card_map.append({
             "email": created_emails[i],
             "cardId": card_ids[i]
