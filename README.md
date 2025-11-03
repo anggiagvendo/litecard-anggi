@@ -84,6 +84,27 @@ If you have Python installed in your device, skip step 1 and 2 :
 | 2 | Authorize access_token| - | - | Fill the access token into authorization pop-up from authorization button at top right of Swagger page  | access_token is verified |  |  |  |
 | 3 | Update birthday parameter| https://bff-api.demo.litecard.io/api/v1/card | PATCH | Fill request body with json format below {*update birthday payload*}  | success update birthday |  |  |  |
 | 4 | Update passes into inactive| https://bff-api.demo.litecard.io/api/v1/card/status | POST |  Fill request body with json format below {*update passes into inactive*}  | success update pass status |  |  |  |
-| 5 | Validate the card update|https://bff-api.demo.litecard.io/api/v1/card | GET | Fill request body with json format below {*update passes into inactive*}  | both birthday and parameter updates are reflected well for each passes |  |  |  |
+| 5 | Validate the card update|https://bff-api.demo.litecard.io/api/v1/card | GET | Fill request body with json format below {*update passes into deleted*}  | both birthday and parameter updates are reflected well for each passes |  |  |  |
+
+
+ - update birthday payload : 
+`{ 
+"cardId": "<CARD_ID>", 
+"cardPayload": { 
+"birthday": "2025-10-25T10:26:01.963Z" 
+} 
+}`
+
+- update passes into inactive : 
+`{ 
+"cardId": "<CARD_ID>", 
+"status": "ACTIVE" 
+}`
+
+- update passes into deleted : 
+`{ 
+"cardId": "<CARD_ID>", 
+"status": "DELETED" 
+}`
 
 

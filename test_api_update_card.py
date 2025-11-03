@@ -62,10 +62,6 @@ def test_api_flow() :
                 print (f"\n collecting {email} and {card_id}")
 
                 #test API flow
-                #GET API
-                get_result = api_request(request_context, "GET", f"/api/v1/card/{card_id}", token)
-                print(f"\n card data : {get_result}")
-
                 #Update birthday card
                 update_payload = {
                     "cardId": f"{card_id}",
@@ -76,6 +72,10 @@ def test_api_flow() :
                 update_birthday_card = api_request(request_context, "PATCH", f"/api/v1/card", token, body=json.dumps(update_payload))
 
                 print (f"\n update birthday result : {update_birthday_card}")
+
+                #GET API
+                get_result = api_request(request_context, "GET", f"/api/v1/card/{card_id}", token)
+                print(f"\n card data : {get_result}")
 
 
             #Update status to inactive and delete
@@ -104,5 +104,9 @@ def test_api_flow() :
 
                 update_status_inactive = api_request(request_context, "POST", f"/api/v1/card/status", token, body=json.dumps(update_status_inactive_payload))
                 print(f"updating status of {card_id} with email {email} into DELETED!")
+
+                #GET API
+                get_result = api_request(request_context, "GET", f"/api/v1/card/{card_id}", token)
+                print(f"\n card data : {get_result}")
 
 

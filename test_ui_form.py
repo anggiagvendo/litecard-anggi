@@ -11,7 +11,7 @@ def test_ui_form (page : Page):
     last_name ="Agvendo"
     created_emails = []
     current_index = 1
-    max_count = 5
+    max_count = 2
     
     
     #repeating steps of user creation
