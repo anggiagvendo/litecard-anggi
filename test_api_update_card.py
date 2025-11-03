@@ -90,9 +90,19 @@ def test_api_flow() :
                 #update status to inactive
                 update_status_inactive_payload = {
                     "cardId": f"{card_id}", 
-                    "status": "ACTIVE" 
+                    "status": "INACTIVE" 
                 }
 
                 update_status_inactive = api_request(request_context, "POST", f"/api/v1/card/status", token, body=json.dumps(update_status_inactive_payload))
                 print(f"updating status of {card_id} with email {email} into INACTIVE!")
+
+                #update status to delete
+                update_status_inactive_payload = {
+                    "cardId": f"{card_id}", 
+                    "status": "DELETED" 
+                }
+
+                update_status_inactive = api_request(request_context, "POST", f"/api/v1/card/status", token, body=json.dumps(update_status_inactive_payload))
+                print(f"updating status of {card_id} with email {email} into DELETED!")
+
 

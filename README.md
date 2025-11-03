@@ -1,4 +1,27 @@
 # litecard-anggi
+# Installation Steps
+This part will guide to use the automation script at your local.
+
+If you have Python installed in your device, skip step 1 and 2 :
+1. Download Python from official site https://www.python.org/downloads/
+2. Verify Python and pip by executing these commands in cmd : 
+ - ```python --version```
+ - ```pip --version```
+3. Install Pytest plugin by running this command : 
+ - ```pip install pytest-playwright```
+4. Install Playwright browser : 
+ - ```playwright install```
+5. Create a folder for the Playwright project (just make folder like usual).
+6. Put the Playwright project into the created folder.
+7. Open cmd and ensure directory is at the Playwright project folder.
+8. For UI test, execute this command in cmd : 
+ - ```pytest test_ui_form.py -s```
+9. After executing the UI automation, the json file will be created. This json file will be used for API automation.
+10. For API test, execute this command in cmd (ensure that json file has been created from UI automation):
+ - ```pytest test_api_update_card.py -s```
+
+<br><br>
+
 # Manual Test Case Document
 
 ## Test Case Information #1
