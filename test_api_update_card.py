@@ -5,6 +5,7 @@ base_url = "https://bff-api.demo.litecard.io"
 username = "qa-a3@litecard.com.au"
 password = "bR5x$9wNzE"
 
+#get login access_token for reusable cases
 def get_token(request_context) :
     
         login_payload = {
@@ -19,6 +20,7 @@ def get_token(request_context) :
         print(f"access_token : {token}")
         return token
 
+#declaration for API methods
 def api_request(request_context, method, endpoint, token=None, body=None):
     headers = {"Content-type":"application/json"}
     if token :
